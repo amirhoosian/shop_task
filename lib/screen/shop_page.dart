@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shop_task/screen/pages/page1.dart';
+import 'package:shop_task/screen/pages/page2.dart';
+import 'package:shop_task/screen/pages/page3.dart';
+import 'package:shop_task/screen/pages/page4.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ShopPage extends StatelessWidget {
@@ -98,49 +102,15 @@ class ShopPage extends StatelessWidget {
                         // Darker orange color
                         ),
                   ),
+                  PageView(
+                    controller: _controller,
+                    children: [OnePage(), TowPage(), TreePage(), FourPage()],
+                  )
                   // Sneaker image
-                  Positioned(
-                    top: 10,
-                    child: PageView(
-                      controller: _controller,
-                      children: [
-                        ClipOval(
-                          child: Image(
-                              image: AssetImage('images/1.png'),
-                              width: 160,
-                              height: 160,
-                              fit: BoxFit.cover),
-                        ),
-                        ClipOval(
-                          child: Image(
-                              image: AssetImage('images/2.png'),
-                              width: 160,
-                              height: 160,
-                              fit: BoxFit.cover),
-                        ),
-                        ClipOval(
-                          child: Image(
-                              image: AssetImage('images/3.png'),
-                              width: 160,
-                              height: 160,
-                              fit: BoxFit.cover),
-                        ),
-                        ClipOval(
-                          child: Image(
-                              image: AssetImage('images/4.png'),
-                              width: 160,
-                              height: 160,
-                              fit: BoxFit.cover),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SmoothPageIndicator(controller: _controller, count: 4)
                 ],
               ),
             ),
-            SmoothPageIndicator(controller: _controller, count: 4),
-            Text('test')
+            SmoothPageIndicator(controller: _controller, count: 4)
           ],
         ),
       ),
