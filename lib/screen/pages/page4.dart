@@ -13,7 +13,7 @@ class FourPage extends StatelessWidget {
           top: 75,
           child: ClipOval(
             child: Image(
-                image: AssetImage('images/1.png'),
+                image: AssetImage('images/4.jpg'),
                 width: 160,
                 height: 160,
                 fit: BoxFit.cover),

@@ -13,7 +13,7 @@ class TreePage extends StatelessWidget {
           top: 75,
           child: ClipOval(
             child: Image(
-                image: AssetImage('images/1.png'),
+                image: AssetImage('images/3.jpg'),
                 width: 160,
                 height: 160,
                 fit: BoxFit.cover),

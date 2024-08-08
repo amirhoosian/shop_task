@@ -13,7 +13,7 @@ class TowPage extends StatelessWidget {
           top: 75,
           child: ClipOval(
             child: Image(
-                image: AssetImage('images/2.png'),
+                image: AssetImage('images/2.jpg'),
                 width: 160,
                 height: 160,
                 fit: BoxFit.cover),
