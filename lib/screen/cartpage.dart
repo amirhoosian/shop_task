@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_task/screen/cart.dart';
 
 class MyCartPage extends StatelessWidget {
   const MyCartPage({super.key});
@@ -26,7 +27,12 @@ class MyCartPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.pink.shade100),
               child: Column(
-                children: [],
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: MyCart(),
+                  )
+                ],
               )),
         ));
   }
