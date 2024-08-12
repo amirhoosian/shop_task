@@ -169,12 +169,13 @@ class ShopPage extends StatelessWidget {
                     ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text('Size:'),
                       Container(
-                        width: 20,
                         height: 10,
                         child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return Container(
                                 width: 20,
@@ -184,7 +185,7 @@ class ShopPage extends StatelessWidget {
                             },
                             separatorBuilder: (context, index) =>
                                 SizedBox(width: 5),
-                            itemCount: sizeData.length),
+                            itemCount: sizeData.length - 1),
                       )
                     ],
                   ),
