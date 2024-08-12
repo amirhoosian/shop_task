@@ -53,74 +53,7 @@ class ShopPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(width: double.infinity),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                ClipRect(
-                  clipBehavior: Clip.hardEdge,
-                  child: Container(
-                    width: 300,
-                    height: 300,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle, // Light orange color
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 250,
-                  height: 250,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.transparent, // Medium orange color
-                  ),
-                ),
-                Container(
-                  width: 250,
-                  height: 250,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: Colors.lightGreen.shade50, width: 2.5)
-                      // Medium orange color
-                      ),
-                ),
-                Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          color: Colors.lightGreen.shade50, width: 2.5)
-                      // Darker orange color
-                      ),
-                ),
-                Positioned(
-                    top: 10,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.blueAccent,
-                          borderRadius: BorderRadius.circular(10)),
-                      width: 50,
-                      height: 30,
-                      child: Center(
-                        child: Text(
-                          '30%',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                      ),
-                    )),
-                SizedBox(
-                  width: 150,
-                  height: 150,
-                  child: PageView(
-                    controller: _controller,
-                    children: [OnePage(), TowPage(), TreePage(), FourPage()],
-                  ),
-                )
-                // Sneaker image
-              ],
-            ),
+            imageshow(controller: _controller),
             SmoothPageIndicator(
               controller: _controller,
               count: 4,
@@ -129,144 +62,231 @@ class ShopPage extends StatelessWidget {
             SizedBox(
               height: 45,
             ),
-            Container(
-              width: double.infinity,
-              height: 370,
-              decoration: BoxDecoration(
-                  color: Colors.pink[100],
-                  borderRadius: BorderRadius.circular(20)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(width: double.infinity),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Nike Air Max 200',
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.star,
-                            color: Colors.yellow,
-                            size: 32,
-                          ),
-                          SizedBox(width: 5),
-                          Text('(4.5)')
-                        ],
-                      )
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, left: 16),
-                    child: Text(
-                      'Built for notual motion, the Nike Flex shes',
-                      style: TextStyle(fontSize: 17),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text('Size:'),
-                      Container(
-                        height: 10,
-                        child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                width: 20,
-                                height: 10,
-                                color: Colors.yellow,
-                              );
-                            },
-                            separatorBuilder: (context, index) =>
-                                SizedBox(width: 5),
-                            itemCount: sizeData.length - 1),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text('Available Color: '),
-                      Container(
-                        width: 25,
-                        height: 25,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.yellow),
-                      ),
-                      Container(
-                        width: 25,
-                        height: 25,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.red),
-                      ),
-                      Container(
-                        width: 25,
-                        height: 25,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.pink),
-                      ),
-                      Container(
-                        width: 25,
-                        height: 25,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.blue),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 80),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20)),
-                    width: double.infinity,
-                    height: 100,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          '269.00',
-                          style: TextStyle(fontSize: 37),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(20), // Rounded corners
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MyCartPage()));
-                          },
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.add_shopping_cart,
-                                  color: Colors.blue), // Icon and its color
-                              SizedBox(width: 5), // Space between icon and text
-                              Text(
-                                'Add to Cart',
-                                style: TextStyle(color: Colors.blue),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
+            itemopthion(sizeData: sizeData)
           ],
         ),
+      ),
+    );
+  }
+}
+
+class imageshow extends StatelessWidget {
+  const imageshow({
+    super.key,
+    required PageController controller,
+  }) : _controller = controller;
+
+  final PageController _controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        ClipRect(
+          clipBehavior: Clip.hardEdge,
+          child: Container(
+            width: 300,
+            height: 300,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle, // Light orange color
+            ),
+          ),
+        ),
+        Container(
+          width: 250,
+          height: 250,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.transparent, // Medium orange color
+          ),
+        ),
+        Container(
+          width: 250,
+          height: 250,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.lightGreen.shade50, width: 2.5)
+              // Medium orange color
+              ),
+        ),
+        Container(
+          width: 200,
+          height: 200,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.lightGreen.shade50, width: 2.5)
+              // Darker orange color
+              ),
+        ),
+        Positioned(
+            top: 18,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(10)),
+              width: 50,
+              height: 30,
+              child: Center(
+                child: Text(
+                  '30%',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            )),
+        SizedBox(
+          width: 150,
+          height: 150,
+          child: PageView(
+            controller: _controller,
+            children: [OnePage(), TowPage(), TreePage(), FourPage()],
+          ),
+        )
+        // Sneaker image
+      ],
+    );
+  }
+}
+
+class itemopthion extends StatelessWidget {
+  const itemopthion({
+    super.key,
+    required this.sizeData,
+  });
+
+  final List<SizeModel> sizeData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 370,
+      decoration: BoxDecoration(
+          color: Colors.pink[100], borderRadius: BorderRadius.circular(20)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(width: double.infinity),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                'Nike Air Max 200',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                    size: 32,
+                  ),
+                  SizedBox(width: 5),
+                  Text('(4.5)')
+                ],
+              )
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 16),
+            child: Text(
+              'Built for notual motion, the Nike Flex shes',
+              style: TextStyle(fontSize: 17),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text('Size:'),
+              Container(
+                height: 10,
+                child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return Container(
+                        width: 20,
+                        height: 10,
+                        color: Colors.yellow,
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(width: 5),
+                    itemCount: sizeData.length - 1),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text('Available Color: '),
+              Container(
+                width: 25,
+                height: 25,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.yellow),
+              ),
+              Container(
+                width: 25,
+                height: 25,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.red),
+              ),
+              Container(
+                width: 25,
+                height: 25,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.pink),
+              ),
+              Container(
+                width: 25,
+                height: 25,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+              )
+            ],
+          ),
+          SizedBox(height: 80),
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            width: double.infinity,
+            height: 100,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  '269.00',
+                  style: TextStyle(fontSize: 37),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(20), // Rounded corners
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => MyCartPage()));
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.add_shopping_cart,
+                          color: Colors.blue), // Icon and its color
+                      SizedBox(width: 5), // Space between icon and text
+                      Text(
+                        'Add to Cart',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
