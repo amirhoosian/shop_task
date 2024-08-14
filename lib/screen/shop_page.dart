@@ -9,8 +9,11 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ShopPage extends StatelessWidget {
   final List<SizeModel> sizeData = SizeModel.getSize();
+
   ShopPage({super.key});
+
   final _controller = PageController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,7 +55,7 @@ class ShopPage extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(width: double.infinity),
+            // SizedBox(width: double.infinity),
             imageshow(controller: _controller),
             SmoothPageIndicator(
               controller: _controller,
@@ -83,14 +86,11 @@ class imageshow extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        ClipRect(
-          clipBehavior: Clip.hardEdge,
-          child: Container(
-            width: 300,
-            height: 300,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle, // Light orange color
-            ),
+        Container(
+          width: 300,
+          height: 300,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle, // Light orange color
           ),
         ),
         Container(
@@ -119,23 +119,22 @@ class imageshow extends StatelessWidget {
               // Darker orange color
               ),
         ),
+
         Positioned(
-            top: 18,
+            top: 19,
             child: Container(
               decoration: BoxDecoration(
                   color: Colors.blueAccent,
                   borderRadius: BorderRadius.circular(10)),
               width: 50,
               height: 30,
-              child: Center(
-                child: Text(
-                  '30%',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
+              child: Text(
+                '30%',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 20),
               ),
             )),
-        SizedBox(
+        Container(
           width: 150,
           height: 150,
           child: PageView(
@@ -149,7 +148,7 @@ class imageshow extends StatelessWidget {
   }
 }
 
-class itemopthion extends StatelessWidget {
+class itemopthion extends StatefulWidget {
   const itemopthion({
     super.key,
     required this.sizeData,
@@ -158,9 +157,14 @@ class itemopthion extends StatelessWidget {
   final List<SizeModel> sizeData;
 
   @override
+  State<itemopthion> createState() => _itemopthionState();
+}
+
+class _itemopthionState extends State<itemopthion> {
+  @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      // width: double.infinity,
       height: 370,
       decoration: BoxDecoration(
           color: Colors.pink[100], borderRadius: BorderRadius.circular(20)),
@@ -168,7 +172,7 @@ class itemopthion extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(width: double.infinity),
+          // SizedBox(width: double.infinity),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -197,22 +201,50 @@ class itemopthion extends StatelessWidget {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text('Size:'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Size:'),
+              ),
+              SizedBox(width: 30),
               Container(
-                height: 10,
+                height: 25,
                 child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Container(
-                        width: 20,
-                        height: 10,
-                        color: Colors.yellow,
+                      return GestureDetector(
+                        onTap: () {
+                          for (var item in widget.sizeData) {
+                            item.isSelected = false;
+                          }
+                          widget.sizeData[index].isSelected = true;
+                          setState(() {});
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 10,
+                          child: Text(
+                            widget.sizeData[index].size!,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: widget.sizeData[index].isSelected!
+                                    ? Colors.black
+                                    : Colors.white),
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: widget.sizeData[index].isSelected!
+                                ? Colors.white
+                                : Colors.blue,
+                          ),
+                        ),
                       );
                     },
-                    separatorBuilder: (context, index) => SizedBox(width: 5),
-                    itemCount: sizeData.length - 1),
-              )
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 25),
+                    itemCount: widget.sizeData.length),
+              ),
             ],
           ),
           Row(

@@ -6,20 +6,19 @@ class OnePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 150,
-      decoration: BoxDecoration(shape: BoxShape.circle),
-      child: Positioned(
-          top: 75,
-          child: ClipOval(
-              child: Image(
-            image: AssetImage('images/1.png'),
-            width: 160,
-            height: 160,
-            fit: BoxFit.cover,
-            repeat: ImageRepeat.repeat,
-          ))),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Positioned(
+            top: 0,
+            child: ClipOval(
+                child: Image(
+              image: AssetImage('images/1.png'),
+              width: 152,
+              height: 152,
+              fit: BoxFit.cover,
+            ))),
+      ],
     );
   }
 }
