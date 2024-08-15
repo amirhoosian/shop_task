@@ -7,6 +7,8 @@ import 'package:shop_task/screen/pages/page3.dart';
 import 'package:shop_task/screen/pages/page4.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../model/color_model.dart';
+
 class ShopPage extends StatelessWidget {
   final List<SizeModel> sizeData = SizeModel.getSize();
 
@@ -161,13 +163,15 @@ class itemopthion extends StatefulWidget {
 }
 
 class _itemopthionState extends State<itemopthion> {
+  final List<ColorModel> colorData = ColorModel.getcolor();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       // width: double.infinity,
       height: 370,
       decoration: BoxDecoration(
-          color: Colors.pink[100], borderRadius: BorderRadius.circular(20)),
+          color: Colors.pink.shade100, borderRadius: BorderRadius.circular(20)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -194,7 +198,7 @@ class _itemopthionState extends State<itemopthion> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10, left: 16),
+            padding: const EdgeInsets.only(top: 10, left: 27),
             child: Text(
               'Built for notual motion, the Nike Flex shes',
               style: TextStyle(fontSize: 17),
@@ -203,47 +207,50 @@ class _itemopthionState extends State<itemopthion> {
           Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(top: 18, left: 27),
                 child: Text('Size:'),
               ),
               SizedBox(width: 30),
-              Container(
-                height: 25,
-                child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          for (var item in widget.sizeData) {
-                            item.isSelected = false;
-                          }
-                          widget.sizeData[index].isSelected = true;
-                          setState(() {});
-                        },
-                        child: Container(
-                          width: 40,
-                          height: 10,
-                          child: Text(
-                            widget.sizeData[index].size!,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: widget.sizeData[index].isSelected!
-                                    ? Colors.black
-                                    : Colors.white),
+              Padding(
+                padding: const EdgeInsets.only(top: 18, left: 8),
+                child: Container(
+                  height: 25,
+                  child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            for (var item in widget.sizeData) {
+                              item.isSelected = false;
+                            }
+                            widget.sizeData[index].isSelected = true;
+                            setState(() {});
+                          },
+                          child: Container(
+                            width: 40,
+                            height: 10,
+                            child: Text(
+                              widget.sizeData[index].size!,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: widget.sizeData[index].isSelected!
+                                      ? Colors.black
+                                      : Colors.white),
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: widget.sizeData[index].isSelected!
+                                  ? Colors.white
+                                  : Colors.blue,
+                            ),
                           ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: widget.sizeData[index].isSelected!
-                                ? Colors.white
-                                : Colors.blue,
-                          ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(width: 25),
-                    itemCount: widget.sizeData.length),
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 25),
+                      itemCount: widget.sizeData.length),
+                ),
               ),
             ],
           ),
@@ -252,28 +259,42 @@ class _itemopthionState extends State<itemopthion> {
             children: [
               Text('Available Color: '),
               Container(
-                width: 25,
-                height: 25,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.yellow),
-              ),
-              Container(
-                width: 25,
-                height: 25,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.red),
-              ),
-              Container(
-                width: 25,
-                height: 25,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.pink),
-              ),
-              Container(
-                width: 25,
-                height: 25,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+                height: 26,
+                child: ListView.separated(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          for (var item in colorData) {
+                            item.isSelekted = false;
+                          }
+                          colorData[index].isSelekted = true;
+                          setState(() {});
+                        },
+                        child: Container(
+                          width: 26,
+                          height: 26,
+                          decoration: BoxDecoration(
+                              color: colorData[index].isSelekted!
+                                  ? Colors.pink
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Container(
+                                width: 26,
+                                height: 26,
+                                decoration: BoxDecoration(
+                                  color: colorData[index].color,
+                                  borderRadius: BorderRadius.circular(20),
+                                )),
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(width: 20),
+                    itemCount: colorData.length),
               )
             ],
           ),
@@ -299,8 +320,22 @@ class _itemopthionState extends State<itemopthion> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => MyCartPage()));
+                    var size = false;
+                    var color = false;
+                    for (var item in widget.sizeData) {
+                      if (item.isSelected!) {
+                        size = item.isSelected!;
+                      }
+                    }
+                    for (var item in colorData) {
+                      if (item.isSelekted!) {
+                        color = item.isSelekted!;
+                      }
+                    }
+                    if (size && color) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => MyCartPage()));
+                    }
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
